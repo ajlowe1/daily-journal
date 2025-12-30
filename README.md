@@ -229,11 +229,6 @@ Free to use, modify, and share. Built with love for sustainable self-improvement
 
 Built with [Claude Code](https://claude.com/claude-code) by Anthropic.
 
-Inspired by the principles of:
-- Atomic Habits (James Clear)
-- Bullet Journaling (Ryder Carroll)
-- The PARA Method (Tiago Forte)
-- Quantified Self movement
 
 ---
 
