@@ -1,0 +1,89 @@
+# Daily Journal System - Git Ignore
+# Protects your personal journal entries while preserving folder structure
+
+# Personal Journal Entries (exclude all actual entries)
+journal/daily/entries/*.md
+journal/daily/reflections/*.md
+
+# Keep the folder structure visible (don't ignore .gitkeep files)
+!journal/daily/entries/.gitkeep
+!journal/daily/reflections/.gitkeep
+
+# Allow example files to be shared (for documentation)
+!journal/daily/entries/EXAMPLE-*.md
+!journal/daily/reflections/EXAMPLE-*.md
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# macOS Thumbnails
+._*
+
+# macOS Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Optional: Uncomment if you want to share example entries
+# !journal/daily/entries/EXAMPLE-*.md
+# !journal/daily/reflections/EXAMPLE-*-reflection.md
