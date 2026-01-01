@@ -79,6 +79,14 @@ The system identifies:
 - Time allocation trends
 - Multi-day patterns (e.g., "Energy low for 3 days → trigger supportive question")
 
+### 10. **Mobile & Desktop Support**
+Use your journal from any device:
+- **Desktop:** Full Claude Code CLI experience with automatic git sync
+- **Mobile:** Access via Claude mobile app connected to your GitHub repo
+- Automatic platform detection
+- Seamless synchronization across devices
+- Mobile creates branches for safety; merge via GitHub web/app
+
 ---
 
 ## File Structure
@@ -269,6 +277,38 @@ Follow the prompts! The system will guide you through each question.
 ### 4. Review Your Reflection
 
 After completing the check-in, review the generated reflection in `journal/daily/reflections/[date]-reflection.md`.
+
+### 5. Set Up GitHub Repository (Optional - for Mobile Access)
+
+If you want to use your journal from mobile:
+
+1. **Create a private GitHub repository**
+   ```bash
+   cd journal
+   git init
+   git add .
+   git commit -m "Initial journal setup"
+   git remote add origin https://github.com/[username]/[repo-name].git
+   git push -u origin main
+   ```
+
+2. **Connect Claude Mobile App to Your Repo**
+   - Open Claude mobile app
+   - Start a conversation
+   - Connect to your journal repository
+   - The `/daily-checkin` command will be available from `.claude/commands/daily-checkin.md`
+
+3. **Mobile Workflow**
+   - When asked "Desktop or Mobile?", select "Mobile"
+   - Answer questions as usual
+   - Your entry will be saved to a new branch
+   - Merge via GitHub app/web (instructions provided after check-in)
+
+4. **Desktop Workflow**
+   - When asked "Desktop or Mobile?", select "Desktop"
+   - Automatic `git pull` before (syncs from mobile)
+   - Automatic `git push` after (syncs to mobile)
+   - All entries stay synchronized
 
 ---
 

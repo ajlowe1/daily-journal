@@ -50,6 +50,33 @@ claude /daily-checkin
 
 That's it! Follow the prompts and you'll have your first journal entry and reflection in minutes.
 
+### Mobile Access (Optional)
+
+Want to use your journal from your phone? Set up GitHub sync:
+
+1. **Create a private GitHub repository** for your journal
+2. **Push your journal to GitHub:**
+   ```bash
+   cd journal
+   git init
+   git add .
+   git commit -m "Initial journal setup"
+   git remote add origin https://github.com/[username]/[repo-name].git
+   git push -u origin main
+   ```
+3. **Connect Claude Mobile App:**
+   - Open Claude mobile app
+   - Start a conversation
+   - Connect to your journal repository
+   - Run `/daily-checkin` from mobile!
+
+4. **Platform Detection:**
+   - When asked "Desktop or Mobile?", select your platform
+   - Desktop: Automatic git sync before and after
+   - Mobile: Creates branch, merge via GitHub app/web
+
+See [CLAUDE.md](CLAUDE.md#setup-instructions) for detailed mobile setup.
+
 ---
 
 ## 📖 How It Works
@@ -85,6 +112,13 @@ After each check-in, an AI agent generates a comprehensive reflection including:
 ---
 
 ## 💡 Key Features
+
+### 📱 Mobile & Desktop Support (NEW!)
+- **Desktop:** Full Claude Code CLI experience with automatic git sync
+- **Mobile:** Access via Claude mobile app connected to your GitHub repo
+- Automatic platform detection
+- Seamless synchronization across devices
+- Use your journal anywhere, anytime
 
 ### 🔄 Rotating Questions by Day
 - **Monday:** "What's your focus theme for this week?"
@@ -197,10 +231,11 @@ See **[CLAUDE.md](CLAUDE.md)**
 ## 🔒 Privacy
 
 - ✅ All journal entries stored **locally** on your machine
-- ✅ No external services required
+- ✅ No external services required (unless using mobile sync)
 - ✅ Full ownership of your data
 - ✅ Plain markdown files (portable, easy to backup)
 - ✅ Personal entries excluded from git by default
+- ✅ Optional: Use **private** GitHub repo for mobile sync (recommended)
 
 ---
 

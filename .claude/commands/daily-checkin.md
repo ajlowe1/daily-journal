@@ -4,13 +4,31 @@ A personal daily reflection and planning system.
 
 ## Process:
 
-### 1. Date Selection
+### 0. Platform Detection
+First, determine the platform:
+- Ask: **"Are you using Desktop (Claude Code CLI) or Mobile (Claude app)?"**
+- Store this answer to control git operations later
+- Desktop: Will use git pull/push for syncing
+- Mobile: Will skip git operations (Claude app writes directly to GitHub) and provide merge instructions at end
+
+### 1. Sync with GitHub (Desktop Only)
+**If Desktop:**
+- Run `git pull` in the journal directory
+- This ensures you have the latest entries if you've made any from mobile/other devices
+- If pull succeeds with updates: Briefly mention "✓ Synced latest entries from GitHub"
+- If pull succeeds with no updates: Continue silently
+- If pull fails or there are conflicts: Inform user and ask how to proceed
+
+**If Mobile:**
+- Skip this step entirely (Claude app already has latest from GitHub)
+
+### 2. Date Selection
 First ask: **"Are you completing this for today or a different day?"**
 - If different day: Ask "Which day?" (accept: "yesterday", "2 days ago", specific dates like "December 26")
 - Calculate the target date and day of week
 - Use this date for ALL subsequent questions, file naming, and relative date references
 
-### 2. Greeting & Mode Selection
+### 3. Greeting & Mode Selection
 Greet warmly, then ask:
 
 🌅 Daily Check-in for [Target Date (Day of Week)]
@@ -21,7 +39,7 @@ Good [morning/afternoon/evening]!
 - Quick: Core questions only
 - Full: Core + rotating questions
 
-### 3. Core Questions (Every Day)
+### 4. Core Questions (Every Day)
 
 **A. Yesterday's Priority Check** (skip if this is the first entry ever)
 - Read the entry from [target date - 1 day] if it exists
@@ -49,7 +67,7 @@ Good [morning/afternoon/evening]!
 **G. Gratitude**
 - "What are you grateful for today?"
 
-### 4. Rotating Questions (if Full mode)
+### 5. Rotating Questions (if Full mode)
 
 **Determine based on target date's day of week:**
 
@@ -72,8 +90,8 @@ Good [morning/afternoon/evening]!
 **Weekend (Sat/Sun):**
 - "Any other thoughts or reflections?" (optional)
 
-### 5. Save Entry
-Save to `/journal/daily/entries/YYYY-MM-DD.md` using target date with format:
+### 6. Save Entry
+Save to `daily/entries/YYYY-MM-DD.md` using target date with format:
 
 ```markdown
 # Daily Check-in - [Month Day, Year (Day of Week)]
@@ -116,7 +134,7 @@ Save to `/journal/daily/entries/YYYY-MM-DD.md` using target date with format:
 *Entry created: [actual creation date] | Entry for: [target date]*
 ```
 
-### 6. Launch Reflection Subagent
+### 7. Launch Reflection Subagent
 
 Launch general-purpose subagent with:
 
@@ -125,11 +143,11 @@ Analyze this check-in entry for [target date]:
 [provide all responses]
 
 **Context:**
-- Read the last 7 days of entries from `/journal/daily/entries/` if available (relative to target date)
+- Read the last 7 days of entries from `daily/entries/` if available (relative to target date)
 - This entry is for [target date (day of week)]
 - Look for patterns in mood, energy, tags, time allocation, priority completion
 
-**Generate a reflection saved to `/journal/daily/reflections/YYYY-MM-DD-reflection.md`:**
+**Generate a reflection saved to `daily/reflections/YYYY-MM-DD-reflection.md`:**
 
 Header: `# Daily Reflection - [Month Day, Year (Day of Week)]`
 
@@ -150,11 +168,56 @@ A brief summary capturing the key highlights - mood/energy trends, biggest wins,
 
 **Tone:** Empathetic, encouraging, non-judgmental. Focus on progress over perfection.
 
-### 7. Present Summary
+### 8. Present Summary
 After reflection is created, show user:
 - Brief summary of their entry
 - Key insights from reflection
 - Current streaks
 - File locations
+
+### 9. Sync to GitHub
+
+**If Desktop:**
+- Run `git add .` in the journal directory
+- Commit with message: "Daily check-in: [YYYY-MM-DD]"
+- Run `git push` to sync to GitHub
+- If push succeeds: Add "✓ Synced to GitHub" at the end of summary
+- If push fails: Inform user and suggest they push manually later
+
+**If Mobile:**
+- Skip git operations (files already saved to GitHub by Claude app)
+- Instead, provide these instructions:
+
+---
+
+📱 **Mobile Workflow Complete!**
+
+Your entry has been saved to a new branch in your GitHub repository.
+
+**To merge to main:**
+
+**Option 1 - Via GitHub Mobile/Web:**
+1. Open your repository on your phone browser (github.com/[username]/[repo-name])
+2. You'll see a banner "Compare & pull request" for your new branch
+3. Tap it → Review changes → Tap "Create pull request"
+4. Tap "Merge pull request" → Confirm merge
+5. Done! Your entry is now on main branch
+
+**Option 2 - Wait for Desktop:**
+1. Next time you're on your laptop, run these commands in your journal directory:
+   ```
+   git fetch
+   git checkout [branch-name-shown-above]
+   git checkout main
+   git merge [branch-name]
+   git push
+   ```
+
+**Option 3 - Skip the Merge:**
+- Your entry is safely saved in the branch
+- It will be accessible next time you use desktop
+- Desktop's `git pull` will grab all branches
+
+---
 
 Remember: Be encouraging, empathetic, and focus on progress over perfection. The 10-minute time limit is sacred - keep the flow smooth and quick.
