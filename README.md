@@ -34,8 +34,8 @@ This is a **daily journaling and reflection system** built as a custom skill for
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/claude-daily-journal.git
-cd claude-daily-journal
+git clone https://github.com/ajlowe/daily-journal.git
+cd daily-journal
 ```
 
 2. Run the setup script:
